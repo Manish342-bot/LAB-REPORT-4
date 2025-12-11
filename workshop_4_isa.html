@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab_Report_4</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #ccffff;
+            color: #0a126b;
+            font-size: 150%;
+        }
+
+        #output{
+            border: 12px double #202775;
+            color: #523620;
+            text-align: center;
+            padding: 20px;
+            margin: 20px auto 10px auto ;
+            width: 450px;
+        }
+
+        .button{
+            font-family: Arial;
+            font-size: 14pt;
+            color: white;
+            background-color: #202775;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Calculator by Manish</h1>
+
+    <!-- Math Operator Input -->
+    Select an arithmetic operation (* or +):
+    <input type="text" id="tbOperator" value="*">
+    <br> <br>
+
+    <!-- Integer Input -->
+    Enter a positive integer value between 1 and 100:
+    <input type="text" id="tbInteger">
+    <br> <br>
+
+    <!-- Buttons -->
+    <input type="button" value="Calculate" class="button" onclick="calculate()" />
+    <input type="button" value="Clear" class="button" onclick="clearOutput()" />
+
+    <!-- Output -->
+    <div id="output"></div>
+
+    <!-- Javascript -->
+    <script>
+        function calculate() {
+
+            // Get values
+            let operator = document.getElementById("tbOperator").value.trim();
+            let integer = parseInt(document.getElementById("tbInteger").value);
+            let output = document.getElementById("output");
+
+            // Validate integer
+            if (integer < 1 || integer > 100 || isNaN(integer)) {
+                alert("Please enter a positive integer between 1 and 100.");
+                document.getElementById("tbOperator").value = "";
+                document.getElementById("tbInteger").value = "";
+                output.innerHTML = "";
+                return;  // Exit function
+            }
+
+            // Validate operator
+            if (operator !== "*" && operator !== "+") {
+                alert("Please enter a valid operator: * or +");
+                return;
+            }
+
+            let result = "";
+
+            // Generate table till 12
+            for (let i = 1; i <= 12; i++) {
+                if (operator === "*") {
+                    result += `${integer} * ${i} = ${integer * i}<br>`;
+                } 
+                else if (operator === "+") {
+                    result += `${integer} + ${i} = ${integer + i}<br>`;
+                }
+            }
+
+            // Display result
+            output.innerHTML = result;
+        }
+
+        function clearOutput() {
+            document.getElementById("output").innerHTML = "";
+            document.getElementById("tbOperator").value = "";
+            document.getElementById("tbInteger").value = "";
+        }
+    </script>
+
+</body>
+</html>
